@@ -1,0 +1,21 @@
+# COMANDO FIND
+
+Devuelve una lista de archivos que podemos recorrer con un for o while.
+Tambien se pueden ejecutar comandos.
+Es recursivo.
+
+find directorio condicion
+find . -name *.sh
+
+Condiciones:
+	-name
+		-name a* (todo lo que empiece con 'a')
+		-name *.txt (todo lo que termine con '.txt')
+		-name a* -and -name *.txt (todo lo que empiece con 'a' y termine con '.txt'
+	-perm
+		-perm 664 (todo lo que tenga permisos '664')
+		-perm -o+r (otra forma de escribir)
+	-size
+		-size 40M (todo lo que pese 40M)
+		-size -1k (todo lo que pesa menos de 1k)
+		-size +10M (todo lo que pese mas de 10M)

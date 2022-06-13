@@ -1,0 +1,6 @@
+# /dev/sda2
+UUID=b7747318-a30a-479e-8960-0eaf9caaacc9	/         	ext4      	rw,relatime	0 1
+
+# /dev/sda1
+UUID=9654-48BC      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+

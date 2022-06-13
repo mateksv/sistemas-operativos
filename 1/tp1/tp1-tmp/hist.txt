@@ -1,0 +1,16 @@
+  765  touch -t 201803060244 perfil.txt
+  766  touch -t 201803060000 perfil.txt
+  768  ll
+  769  head -2 usuarios
+  770  tail -2 grupos
+  771  cat /etc/fstab > filesystem.txt
+  773  clear
+  775  cat filesystem.txt
+  776  wc filesystem.txt
+  777  echo "lineas: $(wc -l filesystem.txt) >> cantidad 
+  778  ls
+  779  echo "lineas: $(wc -l filesystem.txt)" >> cantidad 
+  780  echo "palabras: $(wc -w filesystem.txt)" >> cantidad 
+  781  wc --help
+  782  echo "caracteres: $(wc -m filesystem.txt)" >> cantidad 
+  783  cat cantidad

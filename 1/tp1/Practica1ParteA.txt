@@ -1,0 +1,71 @@
+Trabajo Practico 1
+Alumno: Mateo Sanchez Viamonte
+Legajo: 31035
+Comisión: S22
+Materia: Sistemas Operativos
+Parte A:
+1) Ya había instalado Linux Mate en una notebook para poder seguir usando antes de saber que había que
+sacar fotos.
+2) Comandos:
+• “sudo apt-get update” (me actualiza la lista de cosas que se deben actualizar)
+• “sudo apt-get upgrade” (instala actualización)
+3) Los sistemas operativos deben ser actualizados para mantenerlos seguros. Se instalan mejoras en
+cuanto al funcionamiento y la seguridad, se solucionan errores, bugs y las vulnerabilidades que el sistema
+pueda tener.
+4) Un gestor de arranque es un software que te permite elegir al iniciar una máquina, que sistema
+operativo o software ejecutar.
+5) Un intérprete de comandos es un programa, mediante el cual el usuario puede dar ordenes a la
+computadora mediante instrucciones. El interprete que se instalo por default en Linux Mate fue la
+“Terminal de MATE”, y en Windows 10, fueron la consola CMD y el PowerShell
+6) El directorio raíz “/”es la base para todos los directorios en Linux.
+• /bin: se encuentran los programas esenciales para el arranque del sistema y su funcionamiento.
+• /boot: contiene el núcleo de Linux (kernel), la imagen inicial de la RAM y el bootloader (gestor de
+arranque).
+• /dev: contiene archivos de todos los dispositivos que Linux puede reconocer.
+• /etc: contiene los archivos de configuración de todo el sistema y scripts Shell que se ejecutan al
+arranque del sistema
+• /home: es donde se encuentran una carpeta por cada usuario. El nombre de cada subcarpeta
+corresponde al nombre de cada usuario.
+• /lib: contiene librerías requeridas por los programas que están en /bin.
+• /lost+found: es una carpeta usada para la recuperación de datos en caso de corrupción de
+archivos
+• /media: es donde se montan automáticamente dispositivos como memorias USB, CD, etc.
+• /mnt: similar a /media, pero los dispositivos se montan manualmente.
+• /opt: usualmente es usada para instalar programas comerciales (de terceros) en el sistema.
+• /proc: es necesaria solo para que el kernel pueda correr diferentes procesos. Usualmente no se
+modifica.
+• /root: es el directorio del usuario root.
+• /run: es una carpeta para configuración privada y configuraciones del usuario root.
+• /sbin: similar a /bin, pero esta pensado para trabajar con el superusuario.
+• /srv: contiene archivos de servicios instalados por el sistema.
+• /tmp: donde se almacenan los archivos temporales del sistema.
+• /usr: contiene todos los programas usados por un usuario regular.
+• /var: contiene archivos que tienen un contenido variable, como archivos de registros y bases de
+datos.
+7) Comando listar: “ls”
+• “ls -l” (muestra los archivos en detalle)
+• “ls -a” (muestra los archivos ocultos y no ocultos)
+• “ls -la” (combinación de los dos anteriores)
+8) Para obtener ayuda, se debe introducir en la consola el comando “help” (general), “help (comando)”
+(para recibir ayuda especifica) o también el comando “man (comando)” que brinda un manual de ayuda
+del comando que pusimos.
+9) Los usuarios en Windows 10 se guardan en “C:\Users”
+10) Los dos intérpretes de comandos más comunes en Windows son: “CMD” y “PowerShell”, siendo CMD
+el más antiguo.
+11) Directorios Windows 10:
+• \Intel: directorio del procesador Intel.
+• \PerfLogs: almacena los problemas del sistema y otros informes sobre el rendimiento.
+• \ProgramFiles: hay carpetas de aplicaciones instaladas en el sistema operativo. Además, puede
+haber carpetas en las que están configuraciones guardadas y otros datos / módulos comunes de
+aplicaciones instaladas. "Common Files"
+• \ProgramFiles (x86): se encuentran aplicaciones instaladas en Windows dedicados a la
+arquitectura en 64-bits.
+• \Users: se encuentra una carpeta por cada usuario, donde se almacena su información personal.
+• \Windows: donde se guarda información y datos del sistema operativo.
+12) SSH o Secure Shell, es un protocolo de administración remota que le permite a los usuarios
+controlar y modificar sus servidores remotos a través de Internet a través de un mecanismo de
+autenticación.
+Proporciona un mecanismo para autenticar un usuario remoto, transferir entradas desde el cliente
+al host y retransmitir la salida de vuelta al cliente. El servicio se creó como un reemplazo seguro para
+el Telnet sin cifrar y utiliza técnicas criptográficas para garantizar que todas las comunicaciones hacia
+y desde el servidor remoto sucedan de manera encriptada.
