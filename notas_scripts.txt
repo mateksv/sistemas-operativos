@@ -1,0 +1,116 @@
+#####################################
+#	Apuntes de comandos en linux	#
+#									#
+#	Caracter '#': comentarios		#
+#	Caracter '$': comandos			#
+#									#
+#####################################
+
+# GitHub personal access token:
+
+# Conectarse a un servidor ssh (con usuario y contraseña):
+	$ ssh usuario@dominio -p (puerto)
+	$ ssh bandit0@bandit.labs.overthewire.org -p 2220
+	
+#(si la conexion nos saca)hay un margen de tiempo para ejecutar comandos consecutivos
+#esto se pued usar para spawnear una cosola 'bash' :
+$ ssh bandit18@bandit.labs.overthewire.org -p 2220 bash
+
+$ hostname -I		#retorna todas las ip de la conexion
+
+$ echo '' > /dev/tcp/127.0.0.1/30000
+#se envia un mensaje a la direccion '127.0.0.1', en el puerto '30000', si no sale nada en pantalla, esta abierto.
+
+#ejemplo mas complejo para detectar puertos abiertos:
+$ bash -c "echo '' > /dev/tcp/127.0.0.1/30000" 2>/dev/null && echo "[*] Puerto abierto" || echo "[*] Puerto cerrado"
+# 'bash -c " "' ejecuta lo que hay dentro de "" a nivel sistema; solucion para aplicar '2>/dev/null'
+
+$ echo "mensaje" | nc localhost 30000 	# envia un mensaje/contraseña a 'localhost' por el puerto '30000'
+$ telnet localhost 30000 	#nos conecta a 'localhost' por el puerto '30000', luego de conectarse escribimos el mensaje
+
+#para comunicarnos con un servidor en el que el trafico esta encriptado con SSL:
+$ openssl s_client -connect 127.0.0.1:30001
+#con 'openssl' quiero actuar como liente('s_client') para conectarme (-connect) al equipo local ('127.0.0.1') por el puerto especificado (':30001')
+
+$ nmap --open -T5 -v -n -p31000-32000 127.0.0.1
+#con 'nmap' listamos los puertos abiertos (--open)
+#'-T5' es el modo mas agresivo del parametro '-T' (no pasa nada en un entorno controlado (no real))
+#'-v' de 'verbose' para que reporte por consola
+#'-n' para quitarle la resolucion DNS (si no, tarda mas tiempo)
+#'-p31000-32000' es el rango de puertos a mapear en la ip '127.0.0.1'
+
+$ nc -nlvp 5757	#nos ponemos en modo escucha para el puerto '5757'
+====
+$ cat ./-			#Para leer ficheros y archivos nombrados '-'
+$ cat ./*			#Para leer ficheros y archivos nombrados '-'
+$ cat $(pwd)/-		#Para leer ficheros y archivos nombrados '-'
+
+$ cat "spaces in this filename" 	#Para leer archivos con espacios, usar "", o usar ' spaces\ in\ this\ filename '
+
+$ find . -name -file* | xargs file 
+#El comando find busca los archivos que comiencen con 'file' | 'xargs' permite ejecutar un comando para cada concurrencia del find, en este caso 'file'
+$ file directorio/*
+
+$ find . -type f -readable ! -executable -size 1033c | xargs cat | sed 's/^ *#'
+#buscamos un archivo ordinario (-type f)
+#que tenga permisos de lectura (-readable)
+#que no tenga permisos de ejecucion (! -executable)
+#y que pese 1033 bytes (-size 1033c), la 'c' del final refiere a bytes
+#con 'xargs cat' muestro el contenido del archivo
+#con el comado [ sed 's/^ *//' ] sustituyo los espacios en blanco por nada (obtengo un resultado mas limpio (en este caso))
+#con '^' decimos: cualquier cosa que comience con 'espacio' (^ ), y lo que le siga '*' (^ *)
+
+$ find / -user bandit7 -group bandit6 -size 33c 2>/dev/null | xargs cat
+#buscamos un archivo, desde la raiz del directorio (/)
+#que pertenezca al usuario bandit7 (-user bandit7) y al grupo bandit6 (-group bandit6)
+#con un tamaño de 33 bytes (-size 33c)
+#todos los errores los mandamos a /dev/null/ (2>/dev/null)
+
+$ grep "millionth" data.txt 					#busco lo que esta entre "" en el archivo data.txt
+$ awk '/millionth/' data.txt | awk '{print $2}' #Idem anterior, pero imprime el segundo argumento de la linea (usado por conveniencia en este caso)
+$ grep "^hola$" data.txt	#busca todas las coincidencias que empiecen (^) con 'hola' y terminen ($) ahi.
+
+$ cat data.txt | sort | uniq -u
+#con cat y sort lo que hacemos es mostrar ordenadamente el contenido del archivo data.txt
+#luego usamos 'uniq -u' que retorna las lineas que no se repiten (-u)
+#para poder usar 'uniq -u', primero el archivo tiene que estar ordenado (sort)
+
+$ strings data.txt | grep "==="
+#el comando 'strings (archivo)' lista las cadenas de caracteres imprimibles en un fichero
+#con grep "===" busco es cadena de caracteres que me interesa (en este caso)
+$ strings data.txt | grep "===" | tail -1 | awk '{print $2}'	#comando completo que se uso 
+
+$ awk 'NR==4' #imprime la linea 4 (NR==NUM_LINEA)
+$ awk '{print $2}' #imprime el segundo argumento de la linea ($NUM_ARG)
+$ awk 'NF{print $NF}' #imprime el ultimo argumento de la linea
+
+$ echo "Hola manola" | base64 #convierte la cadena en codificacion base64
+$ echo "SG9sYSBtYW5vbGEK" | base64 -d #decodifica desde base64 (parametro -d)
+
+	# *tr - translate or delete characters*
+$ cat data.txt | base64 -d | tr ' ' '\n' #tr transforma ' '(espacios) en '\n'(saltos de linea)
+$ tr ' ' '\n'; funciona igual que $ sed 's/ /\n/g'	# donde 's' refiere a sustitucion '/deEsto/porEsto/', y 'g' es para aplicarlo en todas las lineas
+#tr solo trabaja con caracteres, no con strings
+#sed si trabaja con strings
+
+$ cat data.txt  | tr '[G-ZA-Fg-za-f]' '[T-ZA-St-za-s]' #desde la g, se aplica una rotacion de 13 posiciones, tanto en mayuscula como en minuscula
+
+$ echo "Hola manola" | xxd	#'xxd' convierte la cadena a hexadecimal; devuelve: "00000000: 486f 6c61 206d 616e 6f6c 610a            Hola manola."
+$ echo "Hola manola" | xxd -ps	#'xxd -ps', donde -ps refiere a 'plain hexdump style'; devuelve solo la cadena hex: "486f6c61206d616e6f6c610a"
+$ echo "486f6c61206d616e6f6c610a" | xxd -r	#'xxd -r' (-r) revierte la conversion 
+
+$ file nombreArchivo		#'file' devuelve el tipo de archivo con el que estamos trabajando
+$ 7z l archivoComprimido	#'7z' compresor 7-Zip (universal); con el parametro 'l' lista el contenido que se va a descomprimir
+$ 7z x archivoComprimido	#el parametro 'x' extrae los datos del archivoComprimido
+
+# Desviar errores: 'stderr' 2>/dev/null	
+# '2>/dev/null', donde '2' son los errores, y son enviados a '/dev/null/', es decir que no se muestran en pantalla
+2>&1 #stderr convertido en stdin para ver los errores
+#'stdin' es el flujo correcto del programa
+
+$ disown -a
+$ disown #para independizar procesos
+
+$ rev 	#revierte la cadena o linea
+
+$ diff fichero1 fichero2	#muestra las diferencias entre las lineas, lo que se quito y por lo que fue reemplazado
